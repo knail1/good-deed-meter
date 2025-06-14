@@ -126,5 +126,3 @@ Use Firestore's onSnapshot listeners to subscribe to real-time updates from the 
 Optimize the app by adding pagination to the leaderboard and deed history views. Implement a caching layer on the backend for expensive leaderboard queries. Thoroughly handle loading states and error cases on the frontend. Ensure the UI is responsive and mobile-friendly. Write full end-to-end tests for all key user flows.
 ```
 </prompt>
-
-This breaks down the project into 10 core steps, each with smaller actionable sub-tasks. The prompts provide sufficient context for an LLM to generate the necessary code incrementally while following best practices. The steps build on each other and integrate the code together as the project progresses.
