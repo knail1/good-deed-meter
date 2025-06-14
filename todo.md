@@ -1,78 +1,120 @@
-# Good Deed Meter Todo List
+# Good Deed Meter Implementation Plan
 
-## 1. Project Setup
-- [ ] Create GitHub repo
-- [ ] Set up basic file structure
-  - [ ] Frontend directory
-  - [ ] Backend directory
-- [ ] Initialize as node project
-- [ ] Set up build pipeline
-- [ ] Configure linting, formatting, precommit hooks
+This document outlines the step-by-step implementation plan for the Good Deed Meter Android application. Each step is designed to be self-contained while building upon previous work in a logical sequence.
 
-## 2. Frontend UI Design
-- [ ] Wireframe UI components
-  - [ ] Submit Good Deed form
-  - [ ] Leaderboard
-  - [ ] User profile
-- [ ] Create React component hierarchy
-- [ ] Style with CSS modules or styled-components
+## Phase 1: Project Setup and Foundation
 
-## 3. Frontend Functionality
-- [ ] Implement controlled form components
-- [ ] Add client-side form validation
-- [ ] Make API calls to submit data
-- [ ] Retrieve and display leaderboard data
-- [ ] Retrieve and display user profile
+### Step 1: Project Initialization
+- Create a new Android project with Kotlin
+- Configure build.gradle with required dependencies:
+  - AndroidX Core and AppCompat
+  - Material Design components
+  - Room for database operations
+  - Lifecycle components (ViewModel, LiveData)
+  - Coroutines for asynchronous operations
+  - Play Services Location for geofencing
+  - Hilt for dependency injection (optional)
+- Set up the basic application structure following MVVM architecture
 
-## 4. Backend Setup with Express
-- [ ] Create Express app
-- [ ] Define API routes
-  - [ ] Submit deed
-  - [ ] Get leaderboard
-  - [ ] Get user profile
-- [ ] Add request validation middleware
-- [ ] Implement controller functions
+### Step 2: Data Models and Database
+- Implement the SQLite database schema as specified
+- Create the Location and Visit data models
+- Implement LocationDao and VisitDao interfaces
+- Create the database helper class
+- Write unit tests for database operations
 
-## 5. Firebase Integration
-- [ ] Set up Firebase project
-- [ ] Add Firebase Admin SDK
-- [ ] Implement Firebase Auth
-- [ ] Store deed data in Firestore
-- [ ] Define Firestore data models
+### Step 3: Repository Layer
+- Create repository classes for Locations and Visits
+- Implement methods for data access and manipulation
+- Add error handling for database operations
+- Write unit tests for repository methods
 
-## 6. Backend Deed Submission
-- [ ] Get authenticated user from Firebase Auth
-- [ ] Validate deed submission data
-- [ ] Calculate points for deed
-- [ ] Save deed to Firestore
-- [ ] Update user points total
+## Phase 2: Core Functionality
 
-## 7. Leaderboard Retrieval
-- [ ] Query Firestore for top users by points
-- [ ] Populate leaderboard data
-  - [ ] Rank
-  - [ ] Username
-  - [ ] Points total
-- [ ] Return leaderboard data in API response
+### Step 4: Location Search Integration
+- Implement the OpenStreetMap Nominatim API client
+- Create the location search functionality
+- Add error handling for network operations
+- Implement the location selection and saving process
 
-## 8. User Profiles
-- [ ] Get authenticated user from token
-- [ ] Query Firestore for user document
-  - [ ] Username
-  - [ ] Points
-  - [ ] Deed history
-- [ ] Return user profile data in API response
+### Step 5: Geofencing Service
+- Create the foreground service for geofencing
+- Implement geofence registration logic
+- Add geofence transition handling
+- Implement the VisitLogger to record visits
+- Add notification handling for foreground service
 
-## 9. Real-time Deed Updates
-- [ ] Use Firestore onSnapshot listeners
-- [ ] Subscribe to latest deeds collection
-- [ ] Display new deeds in real-time in UI
-- [ ] Implement delete functionality for user's deeds
-- [ ] Update total points on delete
+### Step 6: Visit Tracking Logic
+- Implement the logic to track and count visits
+- Add same-day visit counter functionality
+- Create the visit recording mechanism
+- Implement the background tracking toggle functionality
 
-## 10. Optimization and Polishing
-- [ ] Add pagination to leaderboard and history
-- [ ] Implement caching layer for leaderboard
-- [ ] Add loading states and error handling
-- [ ] Ensure responsive, mobile-friendly layout
-- [ ] Perform end-to-end tests
+## Phase 3: User Interface
+
+### Step 7: Onboarding and Permissions
+- Create the onboarding screen
+- Implement permission request handling
+- Add permission state management
+- Create UI for permission rationale
+
+### Step 8: Dashboard UI
+- Implement the Dashboard fragment layout
+- Create the statistics view components
+- Add the background tracking toggle
+- Implement period selection dropdown (week/month/year)
+- Create the last visit display
+
+### Step 9: Add Location UI
+- Implement the Add Location fragment
+- Create the address input form
+- Add the search results display
+- Implement the location confirmation UI
+
+### Step 10: History UI
+- Create the History fragment
+- Implement the visit history list
+- Add the CSV export functionality
+- Create the visit detail display
+
+## Phase 4: Integration and Refinement
+
+### Step 11: Navigation and Main Activity
+- Implement the bottom navigation
+- Set up the navigation graph
+- Create the MainActivity to host fragments
+- Add transitions between screens
+
+### Step 12: Error Handling and Edge Cases
+- Implement comprehensive error handling
+- Add geofence limit handling
+- Create UI for error states
+- Implement permission revocation handling
+
+### Step 13: Data Export
+- Implement the CSV export functionality
+- Add file writing to Downloads directory
+- Create the export mapping logic
+- Add error handling for export operations
+
+### Step 14: Testing and Optimization
+- Write instrumentation tests
+- Perform battery usage optimization
+- Test geofence trigger reliability
+- Optimize database queries
+- Test on various Android versions
+
+### Step 15: Final Polishing
+- Add the styled header text
+- Implement accessibility features
+- Perform UI refinements
+- Add final error handling
+- Complete documentation
+
+## Implementation Notes
+
+- Each step should be completed and tested before moving to the next
+- Commit code after each step is completed and tested
+- Each step should result in a functional (though incomplete) application
+- Focus on quality and correctness rather than speed
+- Follow Android best practices throughout implementation
